@@ -154,6 +154,11 @@
     <ClInclude Include="src\Engine.hpp" />
     <ClInclude Include="src\utils\debugUtils.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\compile.bat" />
+    <None Include="res\shaders\testf.frag" />
+    <None Include="res\shaders\testv.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

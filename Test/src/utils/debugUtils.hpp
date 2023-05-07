@@ -2,31 +2,30 @@
 
 #include <vulkan/vulkan.h>
 
-VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
+//Called whenever a Vulkan throws an error/warning.
+inline VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 	VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
 	VkDebugUtilsMessageTypeFlagsEXT messageType,
 	const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
 	void* pUserData)
 {
-	if (messageSeverity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
+	if (messageSeverity >= VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT)
 	{
 		std::cerr << "[Validation Layer]: " << pCallbackData->pMessage << "\n";
-		std::cerr << std::endl;
 	}
 	
 	return VK_FALSE;
 }
 
-//Called whenever a GLFW error occurs
-void glfwErrorCallback(int code, const char* description)
+//Called whenever a GLFW error occurs.
+inline void glfwErrorCallback(int code, const char* description)
 {
 	std::cerr << "[GLFW]: " << code << ": " << description;
 	std::cerr << std::endl;
 }
 
-//vkCreateDebugUtilsMessengerEXT and vkCreateDebugUtilsMessengerEXT aren't loaded automatically so we need these proxy functions
-
-VkResult CreateDebugUtilsMessenger(
+//Proxy function that loads vkCreateDebugUtilsMessengerEXT.
+VkResult CreateDebugUtilsMessengerEXT(
 	VkInstance instance,
 	const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
 	const VkAllocationCallbacks* pAllocator,
@@ -44,7 +43,8 @@ VkResult CreateDebugUtilsMessenger(
 	}
 }
 
-void DestoryDebugUtilsMessenger(
+//Proxy function that loads vkDestroyDebugUtilsMessengerEXT.
+inline void DestoryDebugUtilsMessengerEXT(
 	VkInstance instance,
 	VkDebugUtilsMessengerEXT messenger,
 	const VkAllocationCallbacks* pAllocator
@@ -58,7 +58,8 @@ void DestoryDebugUtilsMessenger(
 	}
 }
 
-void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo)
+//Helper to fill the VkDebugUtilsMessengerCreateInfoEXT struct.
+inline void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo)
 {
 	createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
 	createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;

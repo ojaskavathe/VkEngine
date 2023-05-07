@@ -23,11 +23,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Engine.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\utils\debugUtils.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\testv.vert" />
+    <None Include="res\shaders\testf.frag" />
+    <None Include="res\shaders\compile.bat">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
