@@ -1,4 +1,4 @@
-#include "Engine.hpp"
+#include <Engine.hpp>
 
 #include <iostream>
 #include <vector>
@@ -12,7 +12,7 @@
 
 #include <fstream>		//for reading the shaders
 
-#include "utils/debugUtils.hpp"
+#include <debugUtils.hpp>
 
 void Engine::run()
 {
@@ -438,8 +438,8 @@ void Engine::createRenderPass()
 
 void Engine::createGraphicsPipeline()
 {
-	std::vector<char> vertexShaderCode = readFile("res/shaders/vert.spv");
-	std::vector<char> fragmentShaderCode = readFile("res/shaders/frag.spv");
+	std::vector<char> vertexShaderCode = readFile(std::filesystem::current_path() / "res/shaders/vert.spv");
+	std::vector<char> fragmentShaderCode = readFile(std::filesystem::current_path() / "res/shaders/frag.spv");
 
 	VkShaderModule vertShaderModule = createShaderModule(vertexShaderCode);
 	VkShaderModule fragShaderModule = createShaderModule(fragmentShaderCode);
@@ -1020,13 +1020,14 @@ void Engine::setupDebugMessenger()
 	}
 }
 
-std::vector<char> Engine::readFile(const std::string& filename) {
+std::vector<char> Engine::readFile(const std::filesystem::path& filename) {
 	std::ifstream file(filename, std::ios::ate | std::ios::binary);
 
 	if (!file.is_open()) {
-		throw std::runtime_error("failed to open file!");
+		throw std::runtime_error(std::string("[CPU]: Failed to open file at: ") + filename.string());
 	}
 
+	std::cout << "[CPU]: Reading: " + filename.string() << "\n";
 	size_t fileSize = static_cast<size_t>(file.tellg());
 	std::vector<char> buffer(fileSize);
 

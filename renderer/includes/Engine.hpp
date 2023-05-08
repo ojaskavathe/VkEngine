@@ -4,6 +4,8 @@
 #include <vector>
 #include <optional>
 #include <string>
+#include <filesystem>
+
 
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
@@ -113,6 +115,6 @@ private:
 	bool checkValidationLayerSupport();
 	void setupDebugMessenger();
 
-	static std::vector<char> readFile(const std::string& filename);
+	static std::vector<char> readFile(const std::filesystem::path& filename);
 	VkShaderModule createShaderModule(std::vector<char>& code);
 };
