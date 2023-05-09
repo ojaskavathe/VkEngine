@@ -1,3 +1,5 @@
+project(renderer)
+
 add_library(
     renderer STATIC
     Engine.cpp includes/Engine.hpp
