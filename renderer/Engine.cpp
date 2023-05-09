@@ -1,5 +1,6 @@
-#include <Engine.hpp>
+#include <utils.hpp>
 
+#include <Engine.hpp>
 #include <iostream>
 #include <vector>
 #include <stdexcept>
@@ -12,7 +13,6 @@
 
 #include <fstream>		//for reading the shaders
 
-#include <utils.hpp>
 #include <debugUtils.hpp>
 
 void Engine::run()
