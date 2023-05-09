@@ -12,6 +12,7 @@
 
 #include <fstream>		//for reading the shaders
 
+#include <utils.hpp>
 #include <debugUtils.hpp>
 
 void Engine::run()
@@ -438,8 +439,8 @@ void Engine::createRenderPass()
 
 void Engine::createGraphicsPipeline()
 {
-	std::vector<char> vertexShaderCode = readFile(std::filesystem::current_path() / "res/shaders/vert.spv");
-	std::vector<char> fragmentShaderCode = readFile(std::filesystem::current_path() / "res/shaders/frag.spv");
+	std::vector<char> vertexShaderCode = readFile(utils::getExecutableDir() / "res\\shaders\\vert.spv");
+	std::vector<char> fragmentShaderCode = readFile(utils::getExecutableDir() / "res\\shaders\\frag.spv");
 
 	VkShaderModule vertShaderModule = createShaderModule(vertexShaderCode);
 	VkShaderModule fragShaderModule = createShaderModule(fragmentShaderCode);
